@@ -1,0 +1,34 @@
+[
+    {
+        "name": "Walt Disney World Resort",
+        "latitude": 28.4187,
+        "longitude": -81.5812
+    },
+    {
+        "name": "Disneyland Resort",
+        "latitude": 33.8121,
+        "longitude": -117.9189
+    },
+    {
+        "name": "Tokyo Disney Resort",
+        "latitude": 35.6314,
+        "longitude": 139.8808
+    },
+    {
+        "name": "Disneyland Paris",
+        "latitude": 48.8722,
+        "longitude": 2.7733
+    },
+    {
+        "name": "Hong Kong Disneyland Resort",
+        "location": "China",
+        "latitude": 22.3120,
+        "longitude": 114.0419
+    },
+    {
+        "name": "Shanghai Disney",
+        "latitude": 31.1433976,
+        "longitude": 121.6227109
+    }
+]
+  
