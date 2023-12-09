@@ -5,6 +5,7 @@ const apiKey = 'af79d4b39a7b47b9b44175548230912';
 interface WeatherResult {
     temperature: number;
     conditions: string;
+    time: number;
 }
 
 async function getWeather(latitude: number, longitude: number): Promise<WeatherResult> {
@@ -15,8 +16,10 @@ async function getWeather(latitude: number, longitude: number): Promise<WeatherR
         const { current } = response.data;
         const temperature = current.temp_f;
         const conditions = current.condition.text;
+        const time = response.data.location.localtime_epoch;
 
-        return { temperature, conditions };
+
+        return { temperature, conditions, time };
     } catch (error) {
         throw new Error(`Error fetching data from weatherapi.com: ${error.message}`);
     }

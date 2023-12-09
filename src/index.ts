@@ -5,7 +5,7 @@ import getWaitTimes from './queues';
 import locations from './disneyLocations.json';
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 const getAllWeathers = async () => {
     const weathers = await Promise.all(locations.map(async (location) => {
         const { latitude, longitude } = location;

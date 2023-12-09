@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Hollywood Studios",
+        "id": 7,
+        "rides": [
+            {
+                "name": "Rock 'n' Roller Coaster",
+                "id": 119
+            },
+            {
+                "name": "Minnie and Mickey's Runaway Railway",
+                "id": 6361
+            }
+        ]
+    },
+    {
+        "name": "Magic Kingdom",
+        "id": 16,
+        "rides": [
+            {
+                "name": "Space Mountain",
+                "id": 284
+            }
+        ]
+    }
+]
