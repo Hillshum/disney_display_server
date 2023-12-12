@@ -1,10 +1,13 @@
 import axios from "axios";
+import {utcToZonedTime} from 'date-fns-tz';
+
+import locations from './disneyLocations.json';
 
 const apiKey = 'af79d4b39a7b47b9b44175548230912';
 
 interface WeatherResult {
     temperature: number;
-    conditions: string;
+    conditions: number;
     time: number;
 }
 
@@ -15,8 +18,12 @@ async function getWeather(latitude: number, longitude: number): Promise<WeatherR
         const response = await axios.get(apiUrl);
         const { current } = response.data;
         const temperature = current.temp_f;
-        const conditions = current.condition.text;
-        const time = response.data.location.localtime_epoch;
+        const conditions = current.condition.code;
+
+        const tzString = response.data.location.tz_id;
+
+        const currentTime = utcToZonedTime(new Date(), tzString);
+        const time = Math.trunc(currentTime.getTime() / 1000); // convert millis to seconds
 
 
         return { temperature, conditions, time };
@@ -25,17 +32,14 @@ async function getWeather(latitude: number, longitude: number): Promise<WeatherR
     }
 }
 
-export default getWeather;
+const getAllWeathers = async () => {
+    const weathers = await Promise.all(locations.map(async (location) => {
+        const { city, latitude, longitude } = location;
+        const result = await getWeather(latitude, longitude);
+        return {city, ...result};
+    }));
+    return weathers;
+}
 
-// // Example usage:
-// const latitude = 37.7749; // Replace with your desired latitude
-// const longitude = -122.4194; // Replace with your desired longitude
+export default getAllWeathers;
 
-// getWeather(latitude, longitude)
-//   .then(result => {
-//     console.log(`Current temperature at (${latitude}, ${longitude}): ${result.temperature}°F`);
-//     console.log(`Current conditions at (${latitude}, ${longitude}): ${result.conditions}`);
-//   })
-//   .catch(error => {
-//     console.error(error.message);
-//   });

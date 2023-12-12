@@ -1,19 +1,10 @@
 import axios from 'axios';
 import express from 'express';
-import weather from './weather';
+import getAllWeathers from './weather';
 import getWaitTimes from './queues';
-import locations from './disneyLocations.json';
 
 const app = express();
 const port = process.env.PORT || 3000;
-const getAllWeathers = async () => {
-    const weathers = await Promise.all(locations.map(async (location) => {
-        const { latitude, longitude } = location;
-        const result = await weather(latitude, longitude);
-        return result;
-    }));
-    return weathers;
-}
 
 app.get('/getWeathers', async (req, res) => {
     try {
