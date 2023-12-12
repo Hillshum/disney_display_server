@@ -13,6 +13,11 @@ interface ParkIdData {
 
 }
 
+interface ResortIdData {
+    name: string;
+    parks: ParkIdData[];
+}
+
 
 interface RideResponse {
     id: number;
@@ -32,6 +37,11 @@ interface ParkResponse {
     id: number;
     name: string;
     lands: LandResponse[];
+    rides: RideResponse[];
+}
+
+interface ResortRidesData{
+    name: string;
     rides: RideResponse[];
 }
 
@@ -58,13 +68,34 @@ const getWaitTimesForPark = async (park: ParkIdData) => {
     return chosenRides
 };
 
-const getWaitTimes = async () => {
-    return Promise.all(queueIds.map(async (park) => getWaitTimesForPark(park)));
+const getWaitsForResort = async (resort: ResortIdData): Promise<ResortRidesData> => {
+    const parkRides = await Promise.all(resort.parks.map(async (park) => getWaitTimesForPark(park)))
+    const flatRides = parkRides.flat();
+    return {name: resort.name, rides: flatRides};
 }
 
-export default getWaitTimes;
+const getWaitsForRandomResort = async (): Promise<ResortRidesData> => {
+    const allResorts = await Promise.all(queueIds.map(async (resort) => (await getWaitsForResort(resort))));
+    const open = getOpenResorts(allResorts);
 
-// Usage example
-// getWaitTimes().then((waitTimes) => {
-//   console.log(waitTimes);
-// });
+    // get a random number between 0 and the number of open resorts
+    const randomIndex = Math.floor(Math.random() * open.length);
+
+    return open[randomIndex];
+}
+
+const getWaitsForResortById = async (resortId: string): Promise<ResortRidesData> => {
+    const uppered = resortId.toUpperCase();
+    const resort = queueIds.find((r) => r.id === uppered);
+    return getWaitsForResort(resort);
+}
+
+
+const isResortOpen = (resort: ResortRidesData) => {
+    return resort.rides.some((ride) => ride.is_open);
+}
+
+const getOpenResorts = (resorts: ResortRidesData[]) => {
+    return resorts.filter((resort) => isResortOpen(resort));
+}
+export  {getWaitsForResortById, getWaitsForRandomResort};

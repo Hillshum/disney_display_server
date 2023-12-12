@@ -1,25 +1,141 @@
 [
     {
-        "name": "Hollywood Studios",
-        "id": 7,
-        "rides": [
+        "name": "Walt Disney World",
+        "id": "WDW",
+        "parks": [
             {
-                "name": "Rock 'n' Roller Coaster",
-                "id": 119
+                "name": "Disney Hollywood Studios",
+                "id": 7,
+                "rides": [
+                    {
+                        "name": "Rock 'n' Roller Coaster",
+                        "id": 119
+                    },
+                    {
+                        "name": "Minnie and Mickey's Runaway Railway",
+                        "id": 6361
+                    }
+                ]
             },
             {
-                "name": "Minnie and Mickey's Runaway Railway",
-                "id": 6361
+                "name": "Magic Kingdom",
+                "id": 6,
+                "rides": [
+                    {
+                        "name": "Space Mountain",
+                        "id": 138
+                    }
+                ]
             }
         ]
     },
     {
-        "name": "Magic Kingdom",
-        "id": 16,
-        "rides": [
+        "name": "Disneyland",
+        "id": "LAND",
+        "parks": [
             {
-                "name": "Space Mountain",
-                "id": 284
+                "name": "Disneyland Park",
+                "id": 16,
+                "rides": [
+                    {
+                        "name": "Space Mountain",
+                        "id": 284
+                    }
+                ]
+            },
+            {
+                "name": "Disney California Adventure",
+                "id": 17,
+                "rides": [
+                    {
+                        "name": "Incredicoaster",
+                        "id": 322
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Disneyland Paris",
+        "id": "PARIS",
+        "parks": [
+            {
+                "name": "Walt Disney Studios Park",
+                "id": 28,
+                "rides": [
+                    {
+                        "name": "Rattatouille: The Adventure",
+                        "id": 37
+                    }
+                ]
+            },
+            {
+                "name": "Disneyland Park Paris",
+                "id": 4,
+                "rides": [
+                    {
+                        "name": "Star Wars Hyperspace Mountain",
+                        "id": 8
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Tokyo Disney Resort",
+        "id": "TOKYO",
+        "parks": [
+            {
+                "name": "Tokyo Disneyland",
+                "id": 274,
+                "rides": [
+                    {
+                        "name": "Space Mountain",
+                        "id": 8016
+                    }
+                ]
+            },
+            {
+                "name": "Tokyo DisneySea",
+                "id": 275,
+                "rides": [
+                    {
+                        "name": "Raging Spirits",
+                        "id": 8046
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Hong Kong Disneyland Resort",
+        "id": "HONGKONG",
+        "parks": [
+            {
+                "name": "Hong Kong Disneyland",
+                "id": 31,
+                "rides": [
+                    {
+                        "name": "Hyperspace Mountain",
+                        "id": 3822
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Shanghai Disney Resort",
+        "id": "SHANGHAI",
+        "parks": [
+            {
+                "name": "Shanghai Disneyland",
+                "id": 30,
+                "rides": [
+                    {
+                        "name": "TRON Lightcycle Power Run",
+                        "id": 2985
+                    }
+                ]
             }
         ]
     }
