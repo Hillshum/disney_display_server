@@ -23,7 +23,7 @@ interface WeatherCacheEntry {
     tzString: string;
 }
 
-const weatherCache = new Cache<WeatherCacheEntry>(60);
+const weatherCache = new Cache<WeatherCacheEntry>(60 * 5);
 
 async function getWeatherFromApi(latitude: number, longitude: number): Promise<WeatherCacheEntry> {
     const apiUrl = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${latitude},${longitude}&units=imperial`;
