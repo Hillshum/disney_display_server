@@ -1,51 +1,14 @@
 import axios from 'axios';
+
+import Cache from './parkCache';
 import queueIds from './queueIds.json';
 
-interface RideIdData {
-    name: string;
-    id: number;
+import {ParkIdData, ParkResponse, ResortIdData, ResortRidesData, RideResponse} from './queueTypes';
 
-}
-interface ParkIdData {
-    name: string;
-    id: number;
-    rides: RideIdData[];
+const CACHE_TTL_SECONDS = 60;
 
-}
+const parkCache = new Cache<RideResponse[]>(CACHE_TTL_SECONDS);
 
-interface ResortIdData {
-    name: string;
-    id: string;
-    parks: ParkIdData[];
-}
-
-
-interface RideResponse {
-    id: number;
-    name: string;
-    is_open: boolean;
-    wait_time: number;
-    last_updated: string;
-}
-
-interface LandResponse {
-    id: number;
-    name: string;
-    rides: RideResponse[];
-}
-
-interface ParkResponse {
-    id: number;
-    name: string;
-    lands: LandResponse[];
-    rides: RideResponse[];
-}
-
-interface ResortRidesData{
-    name: string;
-    id: string;
-    rides: RideResponse[];
-}
 
 const getRidesForPark = (park: ParkResponse) => {
     const rides: RideResponse[] = [];
@@ -60,13 +23,16 @@ const getRidesForPark = (park: ParkResponse) => {
 
 const getWaitTimesForPark = async (park: ParkIdData) => {
     const url = `https://queue-times.com/parks/${park.id}/queue_times.json`;
-    console.log(url)
-    const response = await axios.get<ParkResponse>(url);
-    const availableRides = getRidesForPark(response.data);
-
-    const chosenRides = park.rides.map((r) => {
-        return availableRides.find((ride) => ride.id === r.id);
-    })
+    let chosenRides = parkCache.get(url);
+    if (!chosenRides) {
+        console.log(`cache miss on ${url}`)
+        const response = await axios.get<ParkResponse>(url);
+        const availableRides = getRidesForPark(response.data);
+        chosenRides = park.rides.map((r) => {
+            return availableRides.find((ride) => ride.id === r.id);
+        })
+        parkCache.set(url, chosenRides);
+    }
     return chosenRides
 };
 
@@ -105,4 +71,17 @@ const isResortOpen = (resort: ResortRidesData) => {
 const getOpenResorts = (resorts: ResortRidesData[]) => {
     return resorts.filter((resort) => isResortOpen(resort));
 }
+
+
+const cacheWarmer = () => {
+    console.log('warming cache for parks')
+    const parks = queueIds.flatMap((resort) => resort.parks);
+    parks.forEach((park) => getWaitTimesForPark(park))
+}
+
+if (process.env.USE_CACHEWARMER ) {
+    cacheWarmer();
+    setInterval(cacheWarmer, 30 * 1000);
+}
+
 export  {getWaitsForResortById, getWaitsForRandomResort};
