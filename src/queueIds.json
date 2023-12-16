@@ -1,5 +1,31 @@
 [
     {
+        "name": "Disneyland Resort",
+        "id": "LAND",
+        "parks": [
+            {
+                "name": "Disneyland Park",
+                "id": 16,
+                "rides": [
+                    {
+                        "name": "Space Mountain",
+                        "id": 284
+                    }
+                ]
+            },
+            {
+                "name": "Disney California Adventure",
+                "id": 17,
+                "rides": [
+                    {
+                        "name": "Incredicoaster",
+                        "id": 322
+                    }
+                ]
+            }
+        ]
+    },
+    {
         "name": "Walt Disney World",
         "id": "WDW",
         "parks": [
@@ -30,26 +56,26 @@
         ]
     },
     {
-        "name": "Disneyland",
-        "id": "LAND",
+        "name": "Tokyo Disney Resort",
+        "id": "TOKYO",
         "parks": [
             {
-                "name": "Disneyland Park",
-                "id": 16,
+                "name": "Tokyo Disneyland",
+                "id": 274,
                 "rides": [
                     {
                         "name": "Space Mountain",
-                        "id": 284
+                        "id": 8016
                     }
                 ]
             },
             {
-                "name": "Disney California Adventure",
-                "id": 17,
+                "name": "Tokyo DisneySea",
+                "id": 275,
                 "rides": [
                     {
-                        "name": "Incredicoaster",
-                        "id": 322
+                        "name": "Raging Spirits",
+                        "id": 8046
                     }
                 ]
             }
@@ -76,32 +102,6 @@
                     {
                         "name": "Star Wars Hyperspace Mountain",
                         "id": 8
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        "name": "Tokyo Disney Resort",
-        "id": "TOKYO",
-        "parks": [
-            {
-                "name": "Tokyo Disneyland",
-                "id": 274,
-                "rides": [
-                    {
-                        "name": "Space Mountain",
-                        "id": 8016
-                    }
-                ]
-            },
-            {
-                "name": "Tokyo DisneySea",
-                "id": 275,
-                "rides": [
-                    {
-                        "name": "Raging Spirits",
-                        "id": 8046
                     }
                 ]
             }
