@@ -1,27 +1,27 @@
 [
     {
-        "name": "Walt Disney World Resort",
-        "city": "Orlando",
-        "latitude": 28.4187,
-        "longitude": -81.5812
-    },
-    {
         "name": "Disneyland Resort",
         "city": "Anaheim",
         "latitude": 33.8121,
         "longitude": -117.9189
     },
     {
-        "name": "Disneyland Paris",
-        "city": "Paris",
-        "latitude": 48.8722,
-        "longitude": 2.7733
+        "name": "Walt Disney World Resort",
+        "city": "Orlando",
+        "latitude": 28.4187,
+        "longitude": -81.5812
     },
     {
         "name": "Tokyo Disney Resort",
         "city": "Tokyo",
         "latitude": 35.6314,
         "longitude": 139.8808
+    },
+    {
+        "name": "Disneyland Paris",
+        "city": "Paris",
+        "latitude": 48.8722,
+        "longitude": 2.7733
     },
     {
         "name": "Hong Kong Disneyland Resort",
