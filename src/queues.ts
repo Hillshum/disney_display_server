@@ -46,14 +46,14 @@ const getWaitsForRandomResort = async (previousResortId: string = ""): Promise<R
     const allResorts = await Promise.all(queueIds.map(async (resort) => (await getWaitsForResort(resort))));
     const open = getOpenResorts(allResorts);
 
-    if (open.length === 0) {
+    if (open.length === 1) {
+        console.log('only one resort open')
         return open[0]
     }
 
     const differentResorts = open.filter((resort) => resort.id !== previousResortId.toUpperCase());
     // get a random number between 0 and the number of open resorts
-    const randomIndex = Math.floor(Math.random() * open.length);
-
+    const randomIndex = Math.floor(Math.random() * differentResorts.length);
     return differentResorts[randomIndex];
 }
 
