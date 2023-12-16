@@ -17,7 +17,7 @@ app.get('/getWeathers', async (req, res) => {
 
 app.get('/waitTimes', async (req, res, next) => {
     try {
-        const waitTimes = await getWaitsForRandomResort();
+        const waitTimes = await getWaitsForRandomResort(req.query.previousResort as string);
         res.json(waitTimes);
     } catch (error) {
         next(error)

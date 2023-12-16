@@ -15,6 +15,7 @@ interface ParkIdData {
 
 interface ResortIdData {
     name: string;
+    id: string;
     parks: ParkIdData[];
 }
 
@@ -42,6 +43,7 @@ interface ParkResponse {
 
 interface ResortRidesData{
     name: string;
+    id: string;
     rides: RideResponse[];
 }
 
@@ -71,17 +73,22 @@ const getWaitTimesForPark = async (park: ParkIdData) => {
 const getWaitsForResort = async (resort: ResortIdData): Promise<ResortRidesData> => {
     const parkRides = await Promise.all(resort.parks.map(async (park) => getWaitTimesForPark(park)))
     const flatRides = parkRides.flat();
-    return {name: resort.name, rides: flatRides};
+    return {name: resort.name, id: resort.id, rides: flatRides};
 }
 
-const getWaitsForRandomResort = async (): Promise<ResortRidesData> => {
+const getWaitsForRandomResort = async (previousResortId: string = ""): Promise<ResortRidesData> => {
     const allResorts = await Promise.all(queueIds.map(async (resort) => (await getWaitsForResort(resort))));
     const open = getOpenResorts(allResorts);
 
+    if (open.length === 0) {
+        return open[0]
+    }
+
+    const differentResorts = open.filter((resort) => resort.id !== previousResortId.toUpperCase());
     // get a random number between 0 and the number of open resorts
     const randomIndex = Math.floor(Math.random() * open.length);
 
-    return open[randomIndex];
+    return differentResorts[randomIndex];
 }
 
 const getWaitsForResortById = async (resortId: string): Promise<ResortRidesData> => {
