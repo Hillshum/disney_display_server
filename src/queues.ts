@@ -25,7 +25,7 @@ const getWaitTimesForPark = async (park: ParkIdData) => {
     const url = `https://queue-times.com/parks/${park.id}/queue_times.json`;
     let chosenRides = parkCache.get(url);
     if (!chosenRides) {
-        console.log(`cache miss on ${url}`)
+        console.log(`fetching data from ${url}`)
         const response = await axios.get<ParkResponse>(url);
         const availableRides = getRidesForPark(response.data);
         chosenRides = park.rides.map((r) => {

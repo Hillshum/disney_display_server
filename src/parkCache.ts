@@ -13,7 +13,7 @@ class Cache<T> {
     }
     get(key: string) {
         if (Date.now() - this.parkCache[key]?.createdAt > this.ttlSeconds * 1000) {
-            console.log('cache expired')
+            console.log(`cache expired on ${key}`)
             return null
         }
         return this.parkCache[key]?.value;
