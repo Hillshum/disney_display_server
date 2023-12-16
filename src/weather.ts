@@ -15,12 +15,14 @@ interface WeatherResult {
     temperature: number;
     conditions: number;
     time: number;
+    isDay: boolean;
 }
 
 interface WeatherCacheEntry {
     temperature: number;
     conditions: number;
     tzString: string;
+    isDay: boolean;
 }
 
 const weatherCache = new Cache<WeatherCacheEntry>(60 * 5);
@@ -35,6 +37,7 @@ async function getWeatherFromApi(latitude: number, longitude: number): Promise<W
             temperature: response.data.current.temp_f,
             conditions: response.data.current.condition.code,
             tzString: response.data.location.tz_id,
+            isDay: !!response.data.current.is_day
         };
 
     } catch (error) {
@@ -56,7 +59,7 @@ async function getWeather(location: Location): Promise<WeatherResult> {
     const time = Math.trunc(currentTime.getTime() / 1000); // convert millis to seconds
 
 
-    return { temperature: weather.temperature, conditions: weather.conditions, time };
+    return { temperature: weather.temperature, conditions: weather.conditions, time, isDay: weather.isDay };
 }
 
 const getAllWeathers = async () => {
