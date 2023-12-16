@@ -4,7 +4,10 @@ import Cache from "./parkCache";
 
 import locations from './disneyLocations.json';
 
-const apiKey = 'af79d4b39a7b47b9b44175548230912';
+const apiKey = process.env.WEATHER_API_KEY;
+if (!apiKey) {
+    throw new Error('No weather api key found');
+}
 
 interface Location {
     city: string;
