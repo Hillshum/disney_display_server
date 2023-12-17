@@ -10,6 +10,14 @@
                     {
                         "name": "Space Mountain",
                         "id": 284
+                    },
+                    {
+                        "name": "Alice in Wonderland",
+                        "id": 285
+                    },
+                    {
+                        "name": "Pirates of the Caribbean",
+                        "id": 289
                     }
                 ]
             },
@@ -20,6 +28,14 @@
                     {
                         "name": "Incredicoaster",
                         "id": 322
+                    },
+                    {
+                        "name": "Guardians of the Galaxy - Mission: BREAKOUT!",
+                        "id": 329
+                    },
+                    {
+                        "name": "Radiator Springs Racers",
+                        "id": 295
                     }
                 ]
             }
@@ -50,6 +66,24 @@
                     {
                         "name": "Space Mountain",
                         "id": 138
+                    },
+                    {
+                        "name": "TRON Lightcycle / Run",
+                        "id": 11527
+                    }
+                ]
+            },
+            {
+                "name": "Epcot",
+                "id": 5,
+                "rides": [
+                    {
+                        "name": "Test Track",
+                        "id": 160
+                    },
+                    {
+                        "name": "Frozen Ever After",
+                        "id": 2679
                     }
                 ]
             }
@@ -66,6 +100,14 @@
                     {
                         "name": "Space Mountain",
                         "id": 8016
+                    },
+                    {
+                        "name": "The Happy Ride with Baymax",
+                        "id": 8254
+                    },
+                    {
+                        "name": "Pooh's Hunny Hunt",
+                        "id": 8008
                     }
                 ]
             },
@@ -76,6 +118,14 @@
                     {
                         "name": "Raging Spirits",
                         "id": 8046
+                    },
+                    {
+                        "name": "Journey to the Center of the Earth",
+                        "id": 8028
+                    },
+                    {
+                        "name": "Indiana Jones Adventure: Temple of the Crystal Skull",
+                        "id": 8027
                     }
                 ]
             }
@@ -118,6 +168,26 @@
                     {
                         "name": "Hyperspace Mountain",
                         "id": 3822
+                    },
+                    {
+                        "name": "Big Grizzly Mountain Runaway Mine Cars",
+                        "id": 2843
+                    },
+                    {
+                        "name": "Frozen Ever After",
+                        "id": 12433
+                    },
+                    {
+                        "name": "Mystic Manor",
+                        "id": 2844
+                    },
+                    {
+                        "name": "Toy Soldier Parachute Drop",
+                        "id": 10908
+                    },
+                    {
+                        "name": "Slinky Dog Spin",
+                        "id": 2841
                     }
                 ]
             }
