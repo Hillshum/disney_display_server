@@ -50,8 +50,8 @@
                 "id": 7,
                 "rides": [
                     {
-                        "name": "Rock 'n' Roller Coaster",
-                        "id": 119
+                        "name": "Star Wars: Rise of the Resistance",
+                        "id": 6369
                     },
                     {
                         "name": "Minnie and Mickey's Runaway Railway",
@@ -64,8 +64,8 @@
                 "id": 6,
                 "rides": [
                     {
-                        "name": "Space Mountain",
-                        "id": 138
+                        "name": "Haunted Mansion",
+                        "id": 140
                     },
                     {
                         "name": "TRON Lightcycle / Run",
