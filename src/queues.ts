@@ -24,28 +24,48 @@ const getRidesForPark = (park: ParkResponse) => {
 const getWaitTimesForPark = async (park: ParkIdData) => {
     const url = `https://queue-times.com/parks/${park.id}/queue_times.json`;
     let chosenRides = parkCache.get(url);
-    if (!chosenRides) {
-        console.log(`fetching data from ${url}`)
+    if (chosenRides) {
+        return chosenRides;
+    }
+    console.log(`fetching data from ${url}`)
+    try {
         const response = await axios.get<ParkResponse>(url);
         const availableRides = getRidesForPark(response.data);
-        // TODO: handle the case where the requested ride is not in the API response
         chosenRides = park.rides.map((r) => {
             return availableRides.find((ride) => ride.id === r.id);
-        })
+        }).filter((ride) => ride !== undefined);
         parkCache.set(url, chosenRides);
+        return chosenRides;
+
+    } catch(error) {
+        throw new Error(`Error fetching data for park ${park.name}: ${error.message}`);
     }
-    return chosenRides
 };
 
+const isFullfilled = <T>(promise: PromiseSettledResult<T>):  promise is PromiseFulfilledResult<T> => {
+    return promise.status === 'fulfilled';
+}
+
+const isRejected = <T>(promise: PromiseSettledResult<T>):  promise is PromiseRejectedResult => {
+    return promise.status === 'rejected';
+}
+
 const getWaitsForResort = async (resort: ResortIdData): Promise<ResortRidesData> => {
-    const parkRides = await Promise.all(resort.parks.map(async (park) => getWaitTimesForPark(park)))
+    const promises = await Promise.allSettled(resort.parks.map(async (park) => getWaitTimesForPark(park)))
+    const parkRides = promises.filter(isFullfilled).map((p) => p.value);
     const flatRides = parkRides.flat();
+    const rejected = promises.filter(isRejected);
+    rejected.forEach((r) => console.warn(`failed to fetch data: ${r.reason}`));
     return {name: resort.name, id: resort.id, rides: flatRides};
 }
 
 const getWaitsForRandomResort = async (previousResortId: string = ""): Promise<ResortRidesData> => {
     const allResorts = await Promise.all(queueIds.map(async (resort) => (await getWaitsForResort(resort))));
     const open = getOpenResorts(allResorts);
+
+    if (open.length === 0) {
+        throw new Error('no resorts open');
+    }
 
     if (open.length === 1) {
         console.log('only one resort open')
