@@ -1,6 +1,7 @@
 import axios from "axios";
 import {utcToZonedTime} from 'date-fns-tz';
 import Cache from "./parkCache";
+import { isRejected, isFullfilled } from "./utils";
 
 import locations from './disneyLocations.json';
 
@@ -66,11 +67,14 @@ async function getWeather(location: Location): Promise<WeatherResult> {
 }
 
 const getAllWeathers = async () => {
-    const weathers = await Promise.all(locations.map(async (location) => {
+    const weatherResults = await Promise.allSettled(locations.map(async (location) => {
         const { city } = location;
         const result = await getWeather(location);
         return {city, ...result};
     }));
+
+    const weathers = weatherResults.filter(isFullfilled).map((p) => p.value);
+    weatherResults.filter(isRejected).forEach((r) => console.warn(`failed to fetch data: ${r.reason}`));
     return weathers;
 }
 

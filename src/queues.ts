@@ -2,6 +2,7 @@ import axios from 'axios';
 
 import Cache from './parkCache';
 import queueIds from './queueIds.json';
+import {isFullfilled, isRejected} from './utils';
 
 import {ParkIdData, ParkResponse, ResortIdData, ResortRidesData, RideResponse} from './queueTypes';
 
@@ -42,13 +43,6 @@ const getWaitTimesForPark = async (park: ParkIdData) => {
     }
 };
 
-const isFullfilled = <T>(promise: PromiseSettledResult<T>):  promise is PromiseFulfilledResult<T> => {
-    return promise.status === 'fulfilled';
-}
-
-const isRejected = <T>(promise: PromiseSettledResult<T>):  promise is PromiseRejectedResult => {
-    return promise.status === 'rejected';
-}
 
 const getWaitsForResort = async (resort: ResortIdData): Promise<ResortRidesData> => {
     const promises = await Promise.allSettled(resort.parks.map(async (park) => getWaitTimesForPark(park)))
