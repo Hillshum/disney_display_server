@@ -28,6 +28,7 @@ const getWaitTimesForPark = async (park: ParkIdData) => {
         console.log(`fetching data from ${url}`)
         const response = await axios.get<ParkResponse>(url);
         const availableRides = getRidesForPark(response.data);
+        // TODO: handle the case where the requested ride is not in the API response
         chosenRides = park.rides.map((r) => {
             return availableRides.find((ride) => ride.id === r.id);
         })
