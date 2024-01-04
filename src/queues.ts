@@ -1,11 +1,11 @@
 import axios from 'axios';
 
-import Cache from './parkCache';
-import queueIds from './queueIds.json';
-import {isFullfilled, isRejected} from './utils';
-import forceStringToAscii from './forceAscii';
+import Cache from './parkCache.js';
+import {isFullfilled, isRejected} from './utils.js';
+import forceStringToAscii from './forceAscii.js';
+import queueIds from './queueIds.json' with { type: "json" };
 
-import {ParkIdData, ParkResponse, ResortIdData, ResortRidesData, RideResponse} from './queueTypes';
+import {ParkIdData, ParkResponse, ResortIdData, ResortRidesData, RideResponse} from './queueTypes.js';
 
 const CACHE_TTL_SECONDS = 0;
 
@@ -41,13 +41,13 @@ const getWaitTimesForPark = async (park: ParkIdData) => {
         const availableRides = getRidesForPark(response.data);
         chosenRides = park.rides.map((r) => {
             return availableRides.find((ride) => ride.id === r.id);
-        }).filter((ride) => ride !== undefined);
+        }).filter((ride): ride is RideResponse => ride !== undefined);
         chosenRides = chosenRides.map(makeRideAscii);
         parkCache.set(url, chosenRides);
         return chosenRides;
 
     } catch(error) {
-        throw new Error(`Error fetching data for park ${park.name}: ${error.message}`);
+        throw new Error(`Error fetching data for park ${park.name}: ${error}`); // TODO get better error message
     }
 };
 
@@ -83,6 +83,9 @@ const getWaitsForRandomResort = async (previousResortId: string = ""): Promise<R
 const getWaitsForResortById = async (resortId: string): Promise<ResortRidesData> => {
     const uppered = resortId.toUpperCase();
     const resort = queueIds.find((r) => r.id === uppered);
+    if (!resort) {
+        throw new Error(`No resort found with id ${resortId}`);
+    }
     return getWaitsForResort(resort);
 }
 

@@ -1,13 +1,11 @@
 {
+    "extends": "@tsconfig/node20/tsconfig.json",
     "compilerOptions": {
-        "module": "commonjs",
-        "esModuleInterop": true,
-        "allowSyntheticDefaultImports": true,
-        "target": "ES2022",
-        "resolveJsonModule": true,
-        "noImplicitAny": true,
-        "moduleResolution": "node",
         "sourceMap": true,
+        "resolveJsonModule": true,
+        "module": "nodenext",
+        "esModuleInterop": true,
+        "noImplicitAny": false,
         "outDir": "dist",
         "baseUrl": ".",
         "paths": {

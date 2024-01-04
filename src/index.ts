@@ -1,7 +1,7 @@
 import axios from 'axios';
 import express from 'express';
-import getAllWeathers from './weather';
-import {getWaitsForResortById, getWaitsForRandomResort} from './queues';
+import getAllWeathers from './weather.js';
+import {getWaitsForResortById, getWaitsForRandomResort} from './queues.js';
 
 const app = express();
 const port = process.env.PORT || 3000;

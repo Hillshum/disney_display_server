@@ -1,9 +1,9 @@
 import axios from "axios";
 import {utcToZonedTime} from 'date-fns-tz';
-import Cache from "./parkCache";
-import { isRejected, isFullfilled } from "./utils";
+import Cache from "./parkCache.js";
+import { isRejected, isFullfilled } from "./utils.js";
 
-import locations from './disneyLocations.json';
+import locations from './disneyLocations.json' with { type: "json" };
 
 const apiKey = process.env.WEATHER_API_KEY;
 if (!apiKey) {
@@ -45,7 +45,7 @@ async function getWeatherFromApi(latitude: number, longitude: number): Promise<W
         };
 
     } catch (error) {
-        throw new Error(`Error fetching data from weatherapi.com: ${error.message}`);
+        throw new Error(`Error fetching data from weatherapi.com: ${error}`); // TODO get better error message
     }
 }
 
