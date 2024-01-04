@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import Cache from './parkCache.js';
 import {isFullfilled, isRejected} from './utils.js';
-import forceStringToAscii from './forceAscii.js';
+import anyAscii from 'any-ascii';
 import queueIds from './queueIds.json' with { type: "json" };
 
 import {ParkIdData, ParkResponse, ResortIdData, ResortRidesData, RideResponse} from './queueTypes.js';
@@ -12,7 +12,7 @@ const CACHE_TTL_SECONDS = 0;
 const parkCache = new Cache<RideResponse[]>(CACHE_TTL_SECONDS);
 
 const makeRideAscii = (ride: RideResponse) => {
-    const name = forceStringToAscii(ride.name);
+    const name = anyAscii(ride.name);
     return {...ride,
         name,
     }
