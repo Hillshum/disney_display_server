@@ -3,13 +3,20 @@ import axios from 'axios';
 import Cache from './parkCache';
 import queueIds from './queueIds.json';
 import {isFullfilled, isRejected} from './utils';
+import forceStringToAscii from './forceAscii';
 
 import {ParkIdData, ParkResponse, ResortIdData, ResortRidesData, RideResponse} from './queueTypes';
 
-const CACHE_TTL_SECONDS = 60;
+const CACHE_TTL_SECONDS = 0;
 
 const parkCache = new Cache<RideResponse[]>(CACHE_TTL_SECONDS);
 
+const makeRideAscii = (ride: RideResponse) => {
+    const name = forceStringToAscii(ride.name);
+    return {...ride,
+        name,
+    }
+}
 
 const getRidesForPark = (park: ParkResponse) => {
     const rides: RideResponse[] = [];
@@ -35,6 +42,7 @@ const getWaitTimesForPark = async (park: ParkIdData) => {
         chosenRides = park.rides.map((r) => {
             return availableRides.find((ride) => ride.id === r.id);
         }).filter((ride) => ride !== undefined);
+        chosenRides = chosenRides.map(makeRideAscii);
         parkCache.set(url, chosenRides);
         return chosenRides;
 
