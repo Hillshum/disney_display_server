@@ -1,11 +1,12 @@
 import axios from "axios";
 import {utcToZonedTime} from 'date-fns-tz';
 import Cache from "./parkCache.js";
+import { WEATHER_API_KEY } from "./config.js";
 import { isRejected, isFullfilled } from "./utils.js";
 
 import locations from './disneyLocations.json' with { type: "json" };
 
-const apiKey = process.env.WEATHER_API_KEY;
+const apiKey = WEATHER_API_KEY;
 if (!apiKey) {
     throw new Error('No weather api key found');
 }
