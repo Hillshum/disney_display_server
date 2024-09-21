@@ -68,6 +68,10 @@
                         "id": 129
                     },
                     {
+                        "name": "Tiana's Bayou Adventure",
+                        "id": 13630
+                    },
+                    {
                         "name": "TRON Lightcycle / Run",
                         "id": 11527
                     }
@@ -77,10 +81,6 @@
                 "name": "Epcot",
                 "id": 5,
                 "rides": [
-                    {
-                        "name": "Test Track",
-                        "id": 160
-                    },
                     {
                         "name": "Frozen Ever After",
                         "id": 2679
