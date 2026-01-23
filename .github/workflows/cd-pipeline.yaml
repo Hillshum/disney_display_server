@@ -27,4 +27,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: ghcr.io/Hillshum/disney_server:latest
+          tags: ghcr.io/hillshum/disney_server:latest
