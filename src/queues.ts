@@ -2,12 +2,14 @@ import axios from 'axios';
 
 import Cache from './parkCache.js';
 import {isFullfilled, isRejected} from './utils.js';
-import anyAscii from 'any-ascii';
-import queueIds from './queueIds.json' with { type: "json" };
+import getQueueIds from "./queueIdProvider.js";
+import anyAscii from "any-ascii";
 
 import {ParkIdData, ParkResponse, ResortIdData, ResortRidesData, RideResponse} from './queueTypes.js';
 
 const CACHE_TTL_SECONDS = 0;
+
+const queueIds = getQueueIds();
 
 const parkCache = new Cache<RideResponse[]>(CACHE_TTL_SECONDS);
 
